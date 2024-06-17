@@ -29,7 +29,8 @@ struct ContentView: View {
 							Text(choice)
 								.foregroundStyle(.black)
 								.bold()
-								.textCase(/*@START_MENU_TOKEN@*/.uppercase/*@END_MENU_TOKEN@*/)
+								.textCase(.uppercase)
+								.font(.caption)
 						}
 					}
 				}
