@@ -8,14 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+	let choices = ["Rock", "Paper", "Scissors"]
+	@State private var choice = ""
+	
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+		VStack {
+			Spacer()
+			Spacer()
+			HStack {
+				ForEach (choices, id: \.self) { choice in
+					Button {
+						// something
+						print(choice)
+					} label: {
+						VStack {
+							Image(choice)
+								.resizable()
+								.frame(width: 100, height: 100)
+								.shadow(radius: 5)
+							Text(choice)
+								.foregroundStyle(.black)
+								.bold()
+								.textCase(/*@START_MENU_TOKEN@*/.uppercase/*@END_MENU_TOKEN@*/)
+						}
+					}
+				}
+			}
+			Spacer()
+		}
     }
 }
 
