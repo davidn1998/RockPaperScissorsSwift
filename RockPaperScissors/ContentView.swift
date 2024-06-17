@@ -24,7 +24,7 @@ struct ContentView: View {
 	var body: some View {
 		ZStack {
 			LinearGradient(stops: [
-				.init(color: .teal, location: 0.5),
+				.init(color: .secondary, location: 0.5),
 				.init(color: .white, location: 0.5)
 			], startPoint: .top, endPoint: .bottom)
 			.ignoresSafeArea()
@@ -48,32 +48,26 @@ struct ContentView: View {
 			
 			
 			VStack {
-				
-				Spacer()
-				Spacer()
-				Spacer()
-				Spacer()
 				Spacer()
 				
 				VStack(spacing: 55) {
 					HStack {
-						ForEach (choices, id: \.self) { choice in
-							Button {
-								chooseMove(choice)
-							} label: {
+						ForEach(choices, id: \.self) { choice in
+							Button(action: {chooseMove(choice)}) {
 								VStack {
 									Image(choice)
 										.resizable()
 										.frame(width: 100, height: 100)
 										.shadow(radius: 5)
+										.offset(y: playerChoice == choice ? -50 : 0)
 									Text(choice)
 										.foregroundStyle(.black)
 										.bold()
 										.textCase(.uppercase)
 										.font(.caption)
+										.offset(y: playerChoice == choice ? -50 : 0)
 								}
 							}
-							.offset(y: playerChoice == choice ? -50 : 0)
 						}
 					}
 					
@@ -84,6 +78,7 @@ struct ContentView: View {
 								.bold()
 								.textCase(/*@START_MENU_TOKEN@*/.uppercase/*@END_MENU_TOKEN@*/)
 								.opacity(roundState != "" ? 1.0 : 0.0)
+								.foregroundStyle(.black)
 							
 							Button {
 								withAnimation(.easeInOut(duration: 0.3)) {
@@ -102,12 +97,14 @@ struct ContentView: View {
 							
 						}
 						.opacity(!playing ? 1.0 : 0.0)
-						.offset(x: !playing ? 0 : 100)
+						.offset(y: !playing ? 0 : 100)
 						
 						Text("Make your move")
+							.padding()
 							.opacity(playing ? 1.0 : 0.0)
 							.bold()
-							.textCase(/*@START_MENU_TOKEN@*/.uppercase/*@END_MENU_TOKEN@*/)
+							.textCase(.uppercase)
+							.foregroundStyle(.black)
 					}
 					
 				}
